@@ -1,0 +1,22 @@
+<!-- to render errors we need to pass the @recipe
+so that errors partial can be used anywhere it's needed (DRY).
+created a partial _errors.html.erb -->
+
+<%= render 'shared/errors', obj: @recipe %>
+
+<div class="row">
+  <div class="well col-mid-8 col-md-offset-2">
+    <%= form_for @recipe do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      
+      <%= f.label :summary %>
+      <%= f.text_field :summary %>
+      
+      <%= f.label :description %>
+      <%= f.text_area :description, rows: 10 %>
+      
+      <%= f.submit 'Create Recipe', class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>

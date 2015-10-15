@@ -1,6 +1,11 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  #   Cannot render console from 24.61.178.142!    Fix from stackoverflow
+  class Application < Rails::Application
+    config.web_console.whitelisted_ips = '24.61.178.142'
+  end
+  
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
