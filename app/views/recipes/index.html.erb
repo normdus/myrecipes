@@ -11,10 +11,14 @@
       </section>
     </div>
     
-    <div class="col-md-8 well">
+    <div class="col-md-6 well">
       <h4><%= link_to recipe.name, recipe_path(recipe)  %></h4>
       <p><%= recipe.summary %></p>
         <span class='quiet'><small> created: <%= time_ago_in_words(recipe.created_at) %></small></span>
+    </div>
+    <div class="col-md-4">
+      <!-- the image will show only if an image is present - picture? -->
+      <%= image_tag(recipe.picture.url, size: "250x150", class: "gravatar") if recipe.picture? %>
     </div>
     
   </div>
