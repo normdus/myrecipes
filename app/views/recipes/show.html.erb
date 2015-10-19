@@ -20,7 +20,19 @@
       </p>
       <!-- simple_format is a method that puts a line break after each step... -->
       <%= simple_format(@recipe.description) %>
-    </div>
+      <!-- Likes system here..using bootstrap -->
+      <div class="pull-right">
+        <!-- set the like true by adding - like: true - to recipe object which adds to params hash -->
+        <%= link_to like_recipe_path(@recipe, like: true), method: :post do %>
+          <i class="glyphicon glyphicon-thumbs-up"></i> &nbsp <%= @recipe.thumbs_up_total %><!-- from model -->
+        <% end %> &nbsp&nbsp&nbsp&nbsp
+        <!-- set the like false by adding - like: false - to recipe object which adds to params hash -->
+        <%= link_to like_recipe_path(@recipe, like: false), method: :post do %>
+          <i class="glyphicon glyphicon-thumbs-down"></i> &nbsp <%= @recipe.thumbs_down_total %><!-- from model -->
+        <% end %>
+      </div>
+      
+    </div> 
   </div>
 </div>
 

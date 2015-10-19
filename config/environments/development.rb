@@ -4,6 +4,7 @@ Rails.application.configure do
   #   Cannot render console from 24.61.178.142!    Fix from stackoverflow
   class Application < Rails::Application
     config.web_console.whitelisted_ips = '24.61.178.142'
+    config.web_console.whitelisted_ips = '73.47.72.218'
   end
   
   # In the development environment your application's code is reloaded on

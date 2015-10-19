@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
   def index
     # instance variable @recipe - Recipe(table) .find method to pass 
     # all rows from the table and passing to index view
-    @recipes = Recipe.all
+    @recipes = Recipe.all.sort_by{|likes| likes.thumbs_up_total}.reverse
   end
   
   #   show action
@@ -67,13 +67,32 @@ class RecipesController < ApplicationController
     if @recipe.update(recipe_params)
       #do something
       flash[:success] = "Your recipe was updated successfully"
-      # # redirect - show page - need the recipe object for the specific recipe
+      # redirect - show page - need the recipe object for the specific recipe
       redirect_to recipe_path(@recipe)
     else
       render :edit
     end
   end
 
+  # like dislike system
+  def like
+    # instance variable = 
+    @recipe = Recipe.find(params[:id])
+    # set like to params like - url
+    # hard code the chef until authentication created
+    like = Like.create(like: params[:like], chef: Chef.first, recipe: @recipe)
+    # flash message
+    if like.valid?
+      flash[:success] = "Your selection was successful"
+      # redirects to same page because this is available on index and show pages.
+      redirect_to :back
+    else
+      flash[:danger] = "You can only like/dislike a recipe once"
+      # redirects to same page because this is available on index and show pages.
+      redirect_to :back
+    end
+  end
+  
   # whitelist the fields: name, summary, description - strong parameters
   private
 
