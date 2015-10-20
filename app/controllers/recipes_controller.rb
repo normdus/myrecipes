@@ -9,7 +9,7 @@ class RecipesController < ApplicationController
   def index
     # instance variable @recipe - Recipe(table) .find method to pass 
     # all rows from the table and passing to index view
-    @recipes = Recipe.all.sort_by{|likes| likes.thumbs_up_total}.reverse
+    @recipes = Recipe.paginate(page: params[:page], per_page: 4)
   end
   
   #   show action

@@ -7,6 +7,12 @@ class Recipe < ActiveRecord::Base
   validates :summary, presence: true, length: { minimum: 10, maximum: 150 }
   validates :description, presence: true, length: { minimum: 20, maximum: 500 }
 
+# =>picture and private method  
+  mount_uploader :picture, PictureUploader
+  validate :picture_size
+# => sort the order of recipes on index page
+default_scope -> { order(updated_at: :desc) }
+
 # code for the thumbs up/down - used from show.html.erb
   def thumbs_up_total
     self.likes.where(like: true).size  # no clue on this line?
@@ -16,9 +22,7 @@ class Recipe < ActiveRecord::Base
     self.likes.where(like: false).size
   end
 
-# =>picture and private method  
-  mount_uploader :picture, PictureUploader
-  validate :picture_size
+
   
   private
     def picture_size

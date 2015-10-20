@@ -1,9 +1,13 @@
 <%= render 'shared/page_title', title: "All Recipes" %>
 
+<!-- ***** part of the Pagination functionality ***** -->
+<%= will_paginate %>
+
 <!-- iterating recipe object = |recipe|-->
 <% @recipes.each do |recipe| %>
   <div class="row">
   
+    <!-- ***** Displays ths Gravatar for a Chef ***** -->
     <div class="col-md-2">
       <section class="chef_info center">
         <%= gravatar_for recipe.chef, size: 100 %>
@@ -11,13 +15,16 @@
       </section>
     </div>
     
+      <!-- ***** Displays ths well container for recipe content ***** -->
     <div class="col-md-6 well">
       <h4><%= link_to recipe.name, recipe_path(recipe)  %></h4>
       <p><%= recipe.summary %></p>
       <p>
-        <span class='quiet'><small> created: <%= time_ago_in_words(recipe.created_at) %></small></span>
+        <span class='quiet'><small> created: <%= time_ago_in_words(recipe.created_at) %> days ago  |  </small></span>
+        <span class='quiet'><small> updated: <%= time_ago_in_words(recipe.updated_at) %> ago</small></span>
       </p>
-      <!-- Likes system here..using bootstrap -->
+      
+      <!-- ***** Likes system ***** here..using bootstrap -->
       <div class="pull-right">
         <!-- set the like true by adding - like: true - to recipe object which adds to params hash -->
         <%= link_to like_recipe_path(recipe, like: true), method: :post do %>
@@ -28,12 +35,16 @@
           <i class="glyphicon glyphicon-thumbs-down"></i> &nbsp <%= recipe.thumbs_down_total %><!-- from model -->
         <% end %>
       </div>
-    </div>
+    </div>  <!-- ***** END of well container ***** -->
+    
+    <!-- ***** Displays the Recipe image ***** -->
     <div class="col-md-4">
       <!-- the image will show only if an image is present - picture? -->
       <%= image_tag(recipe.picture.url, size: "250x150", class: "gravatar") if recipe.picture? %>
-    </div>
+    </div> <!-- ***** END of Recipe image ***** -->
     
   </div>
   <hr/>
 <% end %>
+
+<%= will_paginate %> <!-- END of Pagination functionality ***** -->
