@@ -1,22 +1,23 @@
-<%= render 'shared/page_title', title: "All Recipes" %>
+<%= render 'shared/page_title', title: "Chef: " + @chef.chefname %>
 
-<!-- ***** part of the Pagination functionality ***** -->
-<%= will_paginate %>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 center">
+      <%= gravatar_for @chef, size: 200 %>
+      <hr/>
+  </div>
+</div>
 
-<!-- iterating recipe object = |recipe|-->
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 center">
+    <h3><em>Recipes: </em></h3>
+    <%= will_paginate @recipes %>
+  </div>
+</div>
+
+  <!-- ***** Displays ths well container for recipe content ***** -->
 <% @recipes.each do |recipe| %>
   <div class="row">
-  
-    <!-- ***** Displays ths Gravatar for a Chef ***** -->
-    <div class="col-md-2">
-      <section class="chef_info center">
-        <%= gravatar_for recipe.chef, size: 100 %>
-        <h5>Chef name: <%= recipe.chef.chefname %></h5>
-      </section>
-    </div>
-    
-      <!-- ***** Displays ths well container for recipe content ***** -->
-    <div class="col-lg-6 well">
+    <div class="col-lg-6 well col-lg-offset-3">
       <h4><%= link_to recipe.name, recipe_path(recipe)  %></h4>
       <p><%= recipe.summary %></p>
       <p>
@@ -36,15 +37,5 @@
         <% end %>
       </div>
     </div>  <!-- ***** END of well container ***** -->
-    
-    <!-- ***** Displays the Recipe image ***** -->
-    <div class="col-md-4">
-      <!-- the image will show only if an image is present - picture? -->
-      <%= image_tag(recipe.picture.url, size: "250x150", class: "gravatar") if recipe.picture? %>
-    </div> <!-- ***** END of Recipe image ***** -->
-    
   </div>
-  <hr/>
 <% end %>
-
-<%= will_paginate %> <!-- END of Pagination functionality ***** -->

@@ -74,7 +74,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  # like dislike system
+  # likes dislike system
   def like
     # instance variable = 
     @recipe = Recipe.find(params[:id])
