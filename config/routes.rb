@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   #   logout -> close session
   #   post login -> create session
   get '/login', to: "logins#new"  # controller - new action #
-  get '/login', to: "logins#create"
-  get '/login', to: "logins#destroy"
+  post '/login', to: "logins#create"
+  get '/logout', to: "logins#destroy"
   
 end

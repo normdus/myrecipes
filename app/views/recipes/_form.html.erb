@@ -5,7 +5,7 @@ created a partial _errors.html.erb -->
 <%= render 'shared/errors', obj: @recipe %>
 
 <div class="row">
-  <div class="well col-mid-8 col-md-offset-2">
+  <div class="well col-md-8 col-md-offset-2">
     <%= form_for(@recipe, html: { multipart: true }) do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name %>
